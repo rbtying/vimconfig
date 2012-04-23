@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/rbtying/lynbrook_robotics/LRT11/Brain'
-let g:netrw_dirhist_2='/home/rbtying/robot/rover/src/rover'
-let g:netrw_dirhist_3='/etc'
-let g:netrw_dirhist_4='/etc/alternatives'
-let g:netrw_dirhist_5='/etc'
-let g:netrw_dirhist_6='/var/www/wp/wp-content/themes/starkers/style'
-let g:netrw_dirhist_7='/home/rbtying/.vim'
