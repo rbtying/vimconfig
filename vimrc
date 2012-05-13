@@ -156,6 +156,9 @@ map <leader>r :RopeRename<CR>
 " Ack searching
 nmap <leader>a <Esc>:Ack!
 
+" Makefile in parent directory
+set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
+
 py << EOF
 import os.path
 import sys
