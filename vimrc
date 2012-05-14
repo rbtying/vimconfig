@@ -158,8 +158,8 @@ nmap <leader>a <Esc>:Ack!
 set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
 
 " buftab
-:noremap <f1> :bprev<CR>
-:noremap <f2> :bnext<CR>
+:noremap <f2> :bprev<CR>
+:noremap <f3> :bnext<CR>
 
 py << EOF
 import os.path
