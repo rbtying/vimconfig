@@ -86,8 +86,6 @@ set printoptions=syntax:y,wrap:y
 set expandtab
 set tabstop=4
 set shiftwidth=4
-map <F3> :set tabstop=3 <CR> :set noet <CR> :retab! <CR> :set tabstop=4 <CR> :set expandtab <CR> :retab <CR> :w <CR>
-map <F2> :set tabstop=2 <CR> :set noet <CR> :retab! <CR> :set tabstop=4 <CR> :set expandtab <CR> :retab <CR> :w <CR>
 " end tab/indent
 
 " start syntax highlighting
@@ -158,6 +156,10 @@ nmap <leader>a <Esc>:Ack!
 
 " Makefile in parent directory
 set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
+
+" buftab
+:noremap <f1> :bprev<CR>
+:noremap <f2> :bnext<CR>
 
 py << EOF
 import os.path
