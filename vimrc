@@ -131,7 +131,7 @@ set pastetoggle=<F8>
 map <F12> :NERDTreeToggle<CR>
 
 " linewrapping
-" set textwidth=120
+set textwidth=80
 
 " line numbers
 set number
