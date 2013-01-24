@@ -161,6 +161,9 @@ set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
 :noremap <f2> :bprev<CR>
 :noremap <f3> :bnext<CR>
 
+" latex pdf
+let g:Tex_DefaultTargetFormat='pdf'
+
 py << EOF
 import os.path
 import sys
