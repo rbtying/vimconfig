@@ -164,6 +164,8 @@ set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
 " latex pdf
 let g:Tex_DefaultTargetFormat='pdf'
 
+set clipboard=unnamedplus
+
 py << EOF
 import os.path
 import sys
