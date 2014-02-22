@@ -142,18 +142,6 @@ set showmatch
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
 
-" omni completion
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-set completeopt=menuone,longest,preview
-
-" refactoring and jump to def
-map <leader>j :RopeGotoDefinition<CR>
-map <leader>r :RopeRename<CR>
-
-" Ack searching
-nmap <leader>a <Esc>:Ack!
-
 " Makefile in parent directory
 set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
 
