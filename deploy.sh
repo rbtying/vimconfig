@@ -9,5 +9,7 @@ echo "Creating symlinks"
 ln -s $DIR/vimrc ~/.vimrc
 ln -s $DIR ~/.vim
 
-git submodule init
-git submodule update
+git submodule update --init --recursive
+
+echo "adding YouCompleteMe"
+cd $DIR/bundle/YouCompleteMe && ./install.sh --clang-completer
