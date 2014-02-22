@@ -95,7 +95,6 @@ let g:solarized_termcolors=16
 let g:solarized_termtrans=1
 set background=dark
 colorscheme solarized " use solarized
-call togglebg#map("<F12>")
 "end syntax highlighting
 
 " start folding
@@ -131,7 +130,9 @@ set pastetoggle=<F8>
 map <F12> :NERDTreeToggle<CR>
 
 " linewrapping
-set textwidth=80
+" set textwidth=80
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 " line numbers
 set number
