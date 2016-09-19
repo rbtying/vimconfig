@@ -5,11 +5,14 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "Removing old vim configuration"
 rm -rf .vim .vimrc
 
-echo "Creating symlinks"
+echo "Downloading vim plug"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+echo "Creating vimrc symlink"
 ln -s $DIR/vimrc ~/.vimrc
-ln -s $DIR ~/.vim
 
-git submodule update --init --recursive
+echo "installing plugins"
+vim +PlugInstall +PlugClean! +q +q
 
-echo "adding YouCompleteMe"
-cd $DIR/bundle/YouCompleteMe && ./install.sh --clang-completer
+echo "You might want to run the following command to install YCM correctly"
+echo "cd ~/.vim/plugged/YouCompleteMe && ./install.sh --all"

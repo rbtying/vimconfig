@@ -1,166 +1,90 @@
-" enable pathogen plugin manager
-" call pathogen#infect()
-filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-syntax on
-set nocp
-filetype plugin indent on
+set t_Co=256
+" vim-plug settings
+call plug#begin('~/.vim/plugged')
 
-" Smart tabbing / autoindenting
-set undolevels=100
-set nocompatible
-set autoindent
-set smarttab
+" General plugins
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'nathanaelkane/vim-indent-guides'
 
-" Allow backspace to back over lines
-set backspace=2
-set exrc
-set cino=t0
-set autowrite
-set noshowcmd
+" Autocompleters
+Plug 'scrooloose/syntastic'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
-if exists('&selection')
-    set selection=exclusive
+" Source control
+Plug 'tpope/vim-fugitive'
+
+" Syntax
+
+" typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'ianks/vim-tsx'
+
+" coffeescript
+Plug 'kchmck/vim-coffee-script'
+
+" colorschemes
+Plug 'Lokaltog/vim-distinguished'
+
+call plug#end()
+
+" undo magic
+if !isdirectory("/tmp/undo-dir")
+    call mkdir("/tmp/undo-dir", "", 0700)
 endif
+set undodir=/tmp/undo-dir
+set undofile
 
-" get rid of stupid audible bell
-set visualbell
+" backspace magic
+set backspace=indent,eol,start
+" mouse magic
+set mouse=a
 
-" Give some room for errors
-set cmdheight=2
+" ctrlp settings
+let g:ctrlp_max_files=0
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
 
-" always show a status line
-au VimEnter * set laststatus=2
+" NERDTree shortcut
+map <C-e> :NERDTreeToggle %<CR>
 
-" show ruler
-set ruler
+" airline settings
+let g:airline#extensions#tabline#enabled = 1
 
-" Use a viminfo file
-set viminfo='20,\"50
+" YCM settings
+let g:ycm_rust_src_path = '/home/robert/rust-src/rustc-1.11.0/src'
+map <C-b> :YcmCompleter GoToDefinition<CR>
 
-" set long history
-set history=100
-
-" Map Y do be analog of D
-map Y y$
-
-" Toggle paste 
-map zp :set paste! paste?<CR>
-
-" So I can get to ,
-noremap g, ,
-" Go to old line + column
-noremap gf gf`"
-noremap <C-^> <C-^>`"
-
-" Switch off search pattern highlighting.
-set nohlsearch
-
-"Toggle search pattern highlighting and display the value
-if v:version >=600
-    map <f7> :nohlsearch<CR>
-else
-    map <f7> :set hlsearch! hlsearch?<CR>
-endif
-imap <f7> <C-O><f7> 
-
-" Map control-cr to goto new line without comment leader
-imap <C-CR> <ESC>o
-
-" Look at syntax attribute
-nmap <F5> :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
-nmap <S-F5> :echo synIDattr(synID(line("."), col("."), 0), "name")<CR>
-
-" delete the swap file
-nmap \\. :echo strpart("Error Deleted",7*(0==delete(expand("%:p:h")."/.".expand("%:t").".swp")),7)<cr>
-
-" Enable 'wild menus'
-set wildmenu
-set showfulltag
-set display+=lastline
-set printoptions=syntax:y,wrap:y
-" end 'wild menus'
-
-" set tab/indent and retab
-set expandtab
-set tabstop=4
-set shiftwidth=4
-" end tab/indent
-
-" start syntax highlighting
-syntax on
-syntax enable
-let g:solarized_termcolors=16
-let g:solarized_termtrans=1
+" colorscheme
+colorscheme distinguished
 set background=dark
-colorscheme solarized " use solarized
-"end syntax highlighting
 
-" start folding
-function! JavaScriptFold() 
-    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-    function! FoldText()
-        return substitute(getline(v:foldstart), '{.*', '{...}', '')
-    endfunction
-    setl foldtext=FoldText()
-endfunction
-au FileType javascript call JavaScriptFold()
-au FileType javascript setl fen
-
-set foldmethod=syntax " fold by syntax
-set foldlevel=1000 " disable folding by default
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
-vnoremap <Space> zf
-" end folding
-
-" start search config
-set incsearch
-" end search config
-
-" start scroll config
-set scrolloff=8
-" end scroll config
-
-" set pastemode
-set pastetoggle=<F8>
-
-" NERDTree 
-map <F12> :NERDTreeToggle<CR>
-
-" linewrapping
-" set textwidth=80
-let &colorcolumn=join(range(81,999),",")
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
+" syntax highlighting
+syntax on
+filetype plugin indent on
 
 " line numbers
 set number
 
-" highlight matching braces
-set showmatch
+" tab expansion
+" default shiftwidth
+set shiftwidth=4
+set tabstop=4
+set expandtab
 
-" intelligent comments
-set comments=sl:/*,mb:\ *,elx:\ */
+"let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 1
+autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=grey
+autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=darkgrey
 
-" Makefile in parent directory
-set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
-
-" buftab
-:noremap <f2> :bprev<CR>
-:noremap <f3> :bnext<CR>
-
-" latex pdf
-let g:Tex_DefaultTargetFormat='pdf'
-
-set clipboard=unnamedplus
-
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dic(__file__=activate_this))
+" js/coffee/ts/ts do 2 spaces instead
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2
+autocmd FileType typescript setlocal tabstop=2 shiftwidth=2
+autocmd FileType coffee setlocal tabstop=2 shiftwidth=2
