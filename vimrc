@@ -57,7 +57,7 @@ map <C-e> :NERDTreeToggle %<CR>
 let g:airline#extensions#tabline#enabled = 1
 
 " YCM settings
-let g:ycm_rust_src_path = '/home/robert/rust-src/rustc-1.11.0/src'
+let g:ycm_rust_src_path = '~/rust-src/rustc-1.11.0/src'
 map <C-b> :YcmCompleter GoToDefinition<CR>
 
 " colorscheme
